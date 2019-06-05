@@ -19,9 +19,11 @@ function findById(id) {
       .first();
 }
 
-async function add(cohort) {
-      const [id] = await db('cohorts').insert(cohort);
-      return findById(id)
+function add(cohort) {
+      return db('cohorts')
+      .insert(cohort)
+      .then(ids => get(ids[0]))
+      
 }
 
 function update(id, changes) {
